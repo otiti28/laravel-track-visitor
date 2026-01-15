@@ -5,10 +5,10 @@ A simple and flexible Laravel package  to track website visitors and page visits
 
 ## 1. Installation
 ```bash
-composer install kitoko/tracker-visitor
+composer install kitoko/visitor-tracker
 ```
 
-## 2. Publish config
+## 2. Publish the configuration file:
 ```
 php artisan vendor:publish --tag=visitor-tracker-config
 ```
@@ -16,7 +16,7 @@ This command will generate
 ```
 config/visitor-tracker.php
 ```
-## 3. Run migration
+## 3. Run migration to create the required tables:
 ````
 php artisan migrate
 ````
@@ -35,6 +35,9 @@ return [
 * ``cache minites`` is the time you want to keep data in cache
 
 ## Usage
+Once installed, the package will automatically track visitors and page views.
+You can display visitor statistics in your application using the provided services or helpers.  
+
 #### Display statistics in blade 
 ```
 <div>
