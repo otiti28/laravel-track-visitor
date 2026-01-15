@@ -1,13 +1,14 @@
 # Visitor Tracker for Laravel
 
-A simple and flexible Laravel package to track website visitors and page visits.
+A simple and flexible Laravel package  to track website visitors and page visits.
 
-## Installation
+
+## 1. Installation
 ```bash
 composer install kitoko/tracker-visitor
 ```
 
-## Publish config
+## 2. Publish config
 ```
 php artisan vendor:publish --tag=visitor-tracker-config
 ```
@@ -15,7 +16,72 @@ This command will generate
 ```
 config/visitor-tracker.php
 ```
-## Run migration
+## 3. Run migration
 ````
 php artisan migrate
 ````
+## Confuguration
+Edit __config/visitor-tracker.php__ to customize your settings, for example:
+```
+return [
+    'enabled' => true,
+    'retention_days' => 30,
+    'cache_minutes' => 10,
+];
+```
+
+* ``enable`` is true by default 
+* ``retention_days`` is how long yo want to conserve your data (It is 1 month by default)
+* ``cache minites`` is the time you want to keep data in cache
+
+## Usage
+#### Display statistics in blade 
+```
+<div>
+    Total visitors: {{ \Kitoko\VisitorTracker\Facades\VisitorTracker::total() }}
+    Today: {{ \Kitoko\VisitorTracker\Facades\VisitorTracker::today() }}
+    Yesterday: {{ \Kitoko\VisitorTracker\Facades\VisitorTracker::yesterday() }}
+</div>
+```
+
+#### Using in a controller
+```
+use Kitoko\VisitorTracker\Facades\VisitorTracker;
+
+public function index()
+{
+    $stats = [
+        'total' => VisitorTracker::total(),
+        'today' => VisitorTracker::today(),
+        'week'  => VisitorTracker::week(),
+    ];
+
+    return view('dashboard', compact('stats'));
+}
+```
+
+## Features
+* Track unique visitors
+* Track page visits
+* Daily, weekly, and monthly statistics
+* Total visitor counter
+* Easy integration with Laravel
+
+## Requirements
+* PHP ^8.0
+* Laravel ^9 | ^10 | ^11 | ^12
+
+## Troubleshooting
+* __Class not found__
+``` 
+composer dump-autoload 
+```
+
+* __Migrations not working?__ Ensure your ``VisitorTrackerServiceProvider`` has:
+```
+$this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+```
+
+## License
+
+This package is open-sourced software licensed under the MIT license.
