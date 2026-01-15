@@ -5,7 +5,7 @@ A simple and flexible Laravel package  to track website visitors and page visits
 
 ## 1. Installation
 ```bash
-composer install kitoko/visitor-tracker
+composer require kitoko/visitor-tracker
 ```
 
 ## 2. Publish the configuration file:
